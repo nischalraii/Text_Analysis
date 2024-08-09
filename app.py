@@ -21,29 +21,44 @@ with st.sidebar:
     ''')
     add_vertical_space(5)
     st.write('Made by Nischal Raii')
+
+
 def main():
-    st.header("Chat with Context 💬")
+    st.header("Below are the options")
 
-    # Initialize the pipeline
-    question_answerer = initialize_pipeline()
+    st.subheader("1. QA")
+    st.subheader("2. Summarize")
 
-    context = st.text_area('Give the Context:')
+    selected = st.selectbox('What do you want to do?',('1','2'),index=None,
+    placeholder="Select contact method...",)
+    st.write(f"Selected Option: {selected}")
 
-    if context:
-        question = st.text_input('Ask a question about the context:')
+    if selected == '1':
+        st.header("Question Answer")
+        # Initialize the pipeline
+        question_answerer = initialize_pipeline()
 
-        if question:
-            st.write(f"**Question:** {question}")
+        context = st.text_area('Give the Context:')
 
-            # Get the answer
-            result = question_answerer(question=question, context=context)
+        if context:
+            question = st.text_input('Ask a question about the context:')
 
-            # Display the result
-            st.write(f"**Answer:** {result['answer']}")
-        else:
-            st.write("Please enter a question.")
+            if question:
+                st.write(f"**Question:** {question}")
 
+                # Get the answer
+                result = question_answerer(question=question, context=context)
+
+                # Display the result
+                st.write(f"**Answer:** {result['answer']}")
+            else:
+                st.write("Please enter a question.")
+    elif selected == '2':
+        st.header("Summarize")
+        st.write("Summarize not supported yet")
+
+    else:
+        st.write("Please enter valid input")
 
 if __name__ == '__main__':
     main()
-
