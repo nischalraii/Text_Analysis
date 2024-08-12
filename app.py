@@ -71,7 +71,11 @@ def textrank_summarize(text, sentence_number=5):
         raise ValueError("sentence_number must be a positive integer.")
 
     # Load spaCy model
-    nlp = spacy.load('en_core_web_sm')
+    try:
+        spacy.load('en_core_web_sm')
+    except OSError:
+        download('en_core_web_sm')
+        spacy.load('en_core_web_sm')
     doc = nlp(text)
 
     # Extract sentences
