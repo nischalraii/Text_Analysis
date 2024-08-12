@@ -10,8 +10,19 @@ import seaborn as sns
 import numpy as np
 from wordcloud import WordCloud
 import subprocess
-import en_core_web_sm
 
+def load_spacy_model():
+    model_name = 'en_core_web_sm'
+    try:
+        nlp = spacy.load(model_name)
+    except OSError:
+        # If the model is not found, download it
+        spacy.cli.download(model_name)
+        nlp = spacy.load(model_name)
+    return nlp
+
+# Load spaCy model once
+nlp = load_spacy_model()
 
 # Initialize the question-answering pipeline once
 @st.cache_resource
@@ -75,7 +86,6 @@ def textrank_summarize(text, sentence_number=5):
         raise ValueError("sentence_number must be a positive integer.")
 
     # Load spaCy model
-    nlp = en_core_web_sm.load()
     doc = nlp(text)
 
 
@@ -146,9 +156,7 @@ def word_freq_summarize(text, sentence_number=5):
     # Validate sentence_number
     if not isinstance(sentence_number, int) or sentence_number <= 0:
         raise ValueError("sentence_number must be a positive integer.")
-
-    # Load spaCy model
-    nlp = en_core_web_sm.load()
+        
     doc = nlp(text)
 
     # Tokenize and compute word frequencies
