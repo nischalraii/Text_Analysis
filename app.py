@@ -9,8 +9,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from wordcloud import WordCloud
-import spacy_streamlit
-from spacy.cli import download
+import subprocess
 
 
 # Initialize the question-answering pipeline once
@@ -19,15 +18,11 @@ def initialize_pipeline():
     return pipeline("question-answering", model="Ferreus/QA_model")
 
 
-# Check if model is installed
-def ensure_model_installed(model_name):
-    try:
-        spacy.load(model_name)
-    except OSError:
-        download(model_name)
-
-# Ensure the model is installed
-ensure_model_installed('en_core_web_sm')
+# Download model if not already present
+try:
+    spacy.load('en_core_web_sm')
+except OSError:
+    subprocess.run(['python', '-m', 'spacy', 'download', 'en_core_web_sm'])
 
 def plot_similarity_matrix(similarity_matrix, num_sentences):
     """Calculate and visualize a similarity matrix for sentences."""
