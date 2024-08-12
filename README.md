@@ -6,8 +6,8 @@ Welcome to the LLM-Powered Text Analysis App! This Streamlit application leverag
 
 1. **Question Answering**: Use a question-answering model to get precise answers from a given context. The model used is available at [Ferreus/QA_model](https://huggingface.co/Ferreus/QA_model).
 2. **Text Summarization**:
-   - **Word Count Frequency**: Summarize text based on the frequency of word occurrence.
-   - **TextRank Algorithm**: Summarize text using the TextRank algorithm for ranking sentences.
+   - **Word Count Frequency**: Summarize text based on the frequency of word occurrence. Explore the implementation in the [Colab notebook](https://colab.research.google.com/drive/1zl4PkmlL3GhrBAWnkBLPbNjDkRkX_J33).
+   - **TextRank Algorithm**: Summarize text using the TextRank algorithm for ranking sentences. You can explore the implementation of TextRank in the [Colab notebook](https://colab.research.google.com/drive/1kUNIPMYyJVYXZoiV9ZKyFX_p-1n9jS0s#scrollTo=dcSxVJ8wRXtP).
 
 ## Demo
 
