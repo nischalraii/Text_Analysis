@@ -10,6 +10,7 @@ import seaborn as sns
 import numpy as np
 from wordcloud import WordCloud
 import spacy_streamlit
+!python -m spacy download en_core_web_sm
 
 
 # Initialize the question-answering pipeline once
@@ -74,8 +75,8 @@ def textrank_summarize(text, sentence_number=5):
         raise ValueError("sentence_number must be a positive integer.")
 
     # Load spaCy model
-    model = ["en_core_web_sm"]
-    doc = spacy_streamlit.visualize(model, text)
+    nlp = spacy.load('en_core_web_sm')
+    doc = nlp(text)
 
 
     # Extract sentences
@@ -147,8 +148,8 @@ def word_freq_summarize(text, sentence_number=5):
         raise ValueError("sentence_number must be a positive integer.")
 
     # Load spaCy model
-    model = ["en_core_web_sm"]
-    doc= spacy_streamlit.visualize(model, text)
+    nlp = spacy.load('en_core_web_sm')
+    doc = nlp(text)
 
     # Tokenize and compute word frequencies
     tokens = [token.text.lower() for token in doc if not token.is_stop and not token.is_punct]
