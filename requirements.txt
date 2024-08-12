@@ -8,4 +8,4 @@ seaborn==0.13.2
 numpy==1.26.4
 wordcloud==1.9.3
 spacy_streamlit==1.0.6
-https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.5.0/en_core_web_sm-1.2.0-py3-none-any.whl
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-1.2.0/en_core_web_sm-1.2.0.tar.gz
