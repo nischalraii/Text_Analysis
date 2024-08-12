@@ -10,19 +10,14 @@ import seaborn as sns
 import numpy as np
 from wordcloud import WordCloud
 import subprocess
+import en_core_web_sm
 
 
 # Initialize the question-answering pipeline once
 @st.cache_resource
 def initialize_pipeline():
     return pipeline("question-answering", model="Ferreus/QA_model")
-
-
-# Download model if not already present
-try:
-    spacy.load('en_core_web_sm')
-except OSError:
-    subprocess.run(['python', '-m', 'spacy', 'download', 'en_core_web_sm'])
+    
 
 def plot_similarity_matrix(similarity_matrix, num_sentences):
     """Calculate and visualize a similarity matrix for sentences."""
@@ -80,7 +75,7 @@ def textrank_summarize(text, sentence_number=5):
         raise ValueError("sentence_number must be a positive integer.")
 
     # Load spaCy model
-    nlp = spacy.load('en_core_web_sm')
+    nlp = en_core_web_sm.load()
     doc = nlp(text)
 
 
@@ -153,7 +148,7 @@ def word_freq_summarize(text, sentence_number=5):
         raise ValueError("sentence_number must be a positive integer.")
 
     # Load spaCy model
-    nlp = spacy.load('en_core_web_sm')
+    nlp = en_core_web_sm.load()
     doc = nlp(text)
 
     # Tokenize and compute word frequencies
