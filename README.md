@@ -4,7 +4,7 @@ Welcome to the LLM-Powered Text Analysis App! This Streamlit application leverag
 
 ## Features
 
-1. **Question Answering**: Use a question-answering model to get precise answers from a given context.
+1. **Question Answering**: Use a question-answering model to get precise answers from a given context. The model used is available at [Ferreus/QA_model](https://huggingface.co/Ferreus/QA_model).
 2. **Text Summarization**:
    - **Word Count Frequency**: Summarize text based on the frequency of word occurrence.
    - **TextRank Algorithm**: Summarize text using the TextRank algorithm for ranking sentences.
