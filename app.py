@@ -9,11 +9,14 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from wordcloud import WordCloud
+import spacy_streamlit
+
 
 # Initialize the question-answering pipeline once
 @st.cache_resource
 def initialize_pipeline():
     return pipeline("question-answering", model="Ferreus/QA_model")
+
 
 def plot_similarity_matrix(similarity_matrix, num_sentences):
     """Calculate and visualize a similarity matrix for sentences."""
@@ -71,8 +74,9 @@ def textrank_summarize(text, sentence_number=5):
         raise ValueError("sentence_number must be a positive integer.")
 
     # Load spaCy model
-    nlp = spacy.load('en_core_web_sm')
-    doc = nlp(text)
+    model = ["en_core_web_sm"]
+    spacy_streamlit.visualize(model, text)
+
 
     # Extract sentences
     sentences = [sent.text.strip() for sent in doc.sents]
@@ -106,6 +110,7 @@ def textrank_summarize(text, sentence_number=5):
 
     return result
 
+
 # Sidebar contents
 with st.sidebar:
     st.title('Question Answering from given Context')
@@ -130,9 +135,11 @@ def plot_wordcloud(word_freq):
     plt.axis('off')
     st.pyplot(plt)
 
+
 def clean_word_freq(word_freq):
     # Remove tokens that are not valid words
     return {word: freq for word, freq in word_freq.items() if word.isalpha()}
+
 
 def word_freq_summarize(text, sentence_number=5):
     # Validate sentence_number
@@ -165,7 +172,7 @@ def word_freq_summarize(text, sentence_number=5):
     # Join the top sentences and clean the result
     result = " ".join(top_sentences).replace('\n', ' ')
 
-    return result , word_freq
+    return result, word_freq
 
 
 def main():
@@ -174,8 +181,8 @@ def main():
     st.subheader("1. QA")
     st.subheader("2. Summarize")
 
-    selected = st.selectbox('What do you want to do?',('1','2'),index=None,
-    placeholder="Select an option",)
+    selected = st.selectbox('What do you want to do?', ('1', '2'), index=None,
+                            placeholder="Select an option", )
     st.write(f"Selected Option: {selected}")
 
     if selected == '1':
@@ -205,9 +212,10 @@ def main():
                                           step=1)
 
         if text:
-            selected_summarization = st.selectbox('What method would you like to use for summarization?', ('Word Count Frequency', 'TextRank Algorithm'), index=None,
+            selected_summarization = st.selectbox('What method would you like to use for summarization?',
+                                                  ('Word Count Frequency', 'TextRank Algorithm'), index=None,
                                                   placeholder="Select summarization method", )
-            if selected_summarization =="Word Count Frequency":
+            if selected_summarization == "Word Count Frequency":
                 if sentence_number > 0:
                     summary, word_freq = word_freq_summarize(text, sentence_number)
                     # st.write(word_freq)
@@ -217,7 +225,7 @@ def main():
                 else:
                     st.write("Please enter a valid number for sentences.")
 
-            elif selected_summarization =="TextRank Algorithm":
+            elif selected_summarization == "TextRank Algorithm":
                 if sentence_number > 0:
                     result = textrank_summarize(text, sentence_number)
                     st.write(f"**Summarized Text:** {result}")
@@ -227,6 +235,7 @@ def main():
             st.write("Please enter text for summarization.")
     else:
         st.write("Please enter valid input")
+
 
 if __name__ == '__main__':
     main()
