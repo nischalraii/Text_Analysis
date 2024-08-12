@@ -9,6 +9,11 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from wordcloud import WordCloud
+import subprocess
+
+@st.cache_resource
+def download_en_core_web_sm():
+    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
 
 # Initialize the question-answering pipeline once
 @st.cache_resource
