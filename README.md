@@ -11,7 +11,7 @@ Welcome to the LLM-Powered Text Analysis App! This Streamlit application leverag
 
 ## Demo
 
-You can try out a live demo of the application here: [8thsemproject.streamlit.app](https://8thsemproject.streamlit.app)
+You can try out a live demo of the application here: [0-text-analysis.streamlit.app](https://0-text-analysis.streamlit.app)
 
 ## Usage
 
