@@ -125,8 +125,8 @@ with st.sidebar:
     ''')
     add_vertical_space(5)
     st.write('Made by:')
-    st.write('Nischal Raii')
-    st.write('Nabin Thing')
+    st.write('- Nischal Raii')
+    st.write('- Nabin Thing')
 
 
 def plot_wordcloud(word_freq):
