@@ -116,7 +116,7 @@ def textrank_summarize(text, sentence_number=5):
 
 # Sidebar contents
 with st.sidebar:
-    st.title('Question Answering from given Context')
+    st.title('Text Analysis from given Context')
     st.markdown('''
     ## About
     This app is an LLM-powered chatbot built using:
@@ -124,7 +124,9 @@ with st.sidebar:
     - [Transformers](https://huggingface.co/transformers/) library
     ''')
     add_vertical_space(5)
-    st.write('Made by Nischal Raii')
+    st.write('Made by:')
+    st.write('Nischal Raii')
+    st.write('Nabin Thing')
 
 
 def plot_wordcloud(word_freq):
